@@ -6,7 +6,7 @@ const ClientRoomCard = React.lazy(() => import('@/components/client/room/room-ca
 import { RoomType } from "@/lib/types";
 import RoomSkeleton from "@/components/admin/room/room-skeleton";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+
 
 
 
@@ -14,17 +14,17 @@ const ClientPage = () => {
     const { apiUrl } = useApiStore();
     const [rooms, setRooms] = useState<RoomType[]>([]);
 
-    const fetchRooms = async () => {
-        try {
-            const response = await axios.get(`${apiUrl as string}/rooms`);
-            setRooms(response.data.data);
-        } catch (error) {
-            console.error("Error fetching rooms:", error);
-            alert('Error, perbaiki rest api')
-        } 
-    };
-
+    
     useEffect(() => {
+        const fetchRooms = async () => {
+            try {
+                const response = await axios.get(`${apiUrl as string}/rooms`);
+                setRooms(response.data.data);
+            } catch (error) {
+                console.error("Error fetching rooms:", error);
+                alert('Error, perbaiki rest api')
+            } 
+        };
         fetchRooms();
     }, [apiUrl]);
 

@@ -1,8 +1,7 @@
-import { Button } from "@/components/ui/button"
+
 import { RoomType } from "@/lib/types"
 import DeleteButton from "./delete-button"
 import EditButton from "./edit-button"
-
 
 const RoomCard = ({room} : {room : RoomType}) => {
     return (

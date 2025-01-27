@@ -11,18 +11,18 @@ const BookingHistory = () => {
     const [bookings, setBookings] = useState<BookingType[]>([]);
 
     useEffect(() => {
+        const fetchBookingHistory = async () => {
+            try {
+            const response = await axios.get(`${apiUrl}/bookings`);
+            setBookings(response.data.data);
+            } catch (error) {
+            console.error(error);
+            alert("Error, perbaiki REST API");
+            }
+        };
         fetchBookingHistory();
     }, [apiUrl]);
 
-    const fetchBookingHistory = async () => {
-        try {
-        const response = await axios.get(`${apiUrl}/bookings`);
-        setBookings(response.data.data);
-        } catch (error) {
-        console.error(error);
-        alert("Error, perbaiki REST API");
-        }
-    };
 
     return (
         <div className="p-8">

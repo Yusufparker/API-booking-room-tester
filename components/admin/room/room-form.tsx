@@ -34,7 +34,7 @@ const RoomForm = ({room} : {room? : RoomType}) => {
             console.log(response);
             
             window.location.reload();
-        } catch (error: any) {
+        } catch (error) {
             console.error("Error updating room:", error);
             alert("Error, perbaiki rest api");
 
@@ -48,7 +48,7 @@ const RoomForm = ({room} : {room? : RoomType}) => {
             console.log(response);
             
             window.location.reload()
-        } catch (error: any) {
+        } catch (error) {
             console.error("Error creating room:", error);
             alert("Error, perbaiki rest api");
 

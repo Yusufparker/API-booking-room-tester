@@ -6,8 +6,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-    DialogClose,
-    DialogFooter
+
 } from "@/components/ui/dialog";
 import { buttonVariants } from '../ui/button';
 import { RoomType } from '@/lib/types';

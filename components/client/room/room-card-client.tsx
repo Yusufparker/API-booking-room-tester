@@ -1,5 +1,4 @@
 
-import { Button } from "@/components/ui/button"
 import { RoomType } from "@/lib/types"
 import BookButton from "../book-button"
 
