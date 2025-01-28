@@ -12,20 +12,28 @@ import {
 } from "@/components/ui/dialog";
 import axios from 'axios';
 import { useApiStore } from '@/hooks/useApiStore';
+import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 
 const DeleteButton = ({id} : {id : number}) => {
     const {apiUrl} = useApiStore()
+    const [loading, setLoading] = useState<boolean>(false)
     const handleDelete = async () =>{
         try {
-            const response = axios.delete(`${apiUrl}/rooms/${id}`)
+            setLoading(true)
+            const response = await axios.delete(`${apiUrl}/rooms/${id}`)
             console.log(response);
-            window.location.reload()
+            toast.success(response.data.message);
+            setTimeout(() => {
+                window.location.reload();
+                setLoading(false)
+            }, 1000);
         } catch (error) {
             console.log(error);
-            alert("Error, perbaiki rest api");
-
-        }
+            toast.error("Error, perbaiki rest api");
+            setLoading(false)
+        } 
     }
 
     return (
@@ -53,8 +61,9 @@ const DeleteButton = ({id} : {id : number}) => {
                     </DialogClose>
                     <Button
                         onClick={handleDelete}
+                        disabled={loading}
                     >
-                        Delete
+                        {loading ? 'Deleting..' : 'Delete'}
                     </Button>
                 </DialogFooter>
             </DialogHeader>

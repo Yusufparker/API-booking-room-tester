@@ -6,6 +6,7 @@ const RoomCard = React.lazy(() => import('@/components/admin/room/room-card'))
 import { RoomType } from "@/lib/types";
 import RoomSkeleton from "@/components/admin/room/room-skeleton";
 import RoomModal from "@/components/admin/room/room-modal";
+import toast from "react-hot-toast";
 
 
 
@@ -20,7 +21,7 @@ const AdminPage = () => {
                 setRooms(response.data.data);
             } catch (error) {
                 console.error("Error fetching rooms:", error);
-                alert("Error, perbaiki rest api");
+                toast.error("Error, perbaiki rest api");
             }
             };
 

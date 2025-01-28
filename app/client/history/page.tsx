@@ -5,6 +5,7 @@ import { useApiStore } from "@/hooks/useApiStore";
 import { useEffect, useState } from "react";
 import { BookingType } from "@/lib/types";
 import Link from "next/link";
+import { MoveLeft } from "lucide-react";
 
 const BookingHistory = () => {
     const { apiUrl } = useApiStore();
@@ -28,8 +29,9 @@ const BookingHistory = () => {
         <div className="p-8">
             <Link
                 href='/client'
-                className="text-sm underline inline-block mb-5"
+                className="text-sm hover:underline flex items-center gap-1 mb-5"
             >
+                <MoveLeft size={10}/>
                 Back
             </Link>
             <h2 className="text-xl font-semibold text-gray-800 mb-4">

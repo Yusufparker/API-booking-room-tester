@@ -24,6 +24,7 @@ const ApiInput = () => {
             <Input
                 className="border-2 disabled:bg-gray-300"
                 size={50}
+                placeholder="Endpoint"
                 value={inputValue}
                 disabled={mode === "READ"}
                 onChange={handleInputChange}

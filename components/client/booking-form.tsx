@@ -7,8 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useApiStore } from "@/hooks/useApiStore";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const BookingForm = ({room_id} : {room_id : number}) => {
+    const [loading, setLoading] = useState<boolean>(false)
     const { apiUrl } = useApiStore();
     const { register, handleSubmit, formState } = useForm<
         z.infer<typeof BookingFormSchema>
@@ -22,14 +25,19 @@ const BookingForm = ({room_id} : {room_id : number}) => {
 
     const onSubmit = handleSubmit(async (values) => {  
         console.log(values);
-              
         try {
+            setLoading(true)
             const response = await axios.post(`${apiUrl}/bookings`, values);
             console.log(response);
-            window.location.reload();
+            toast.success(response.data.message);
+            setTimeout(() => {
+                window.location.href='/client/history';
+                setLoading(false)
+            }, 1000);
         } catch (error) {
             console.error("Error creating booking:", error);
-            alert("Error, perbaiki REST API");
+            toast.error("Error, perbaiki REST API");
+            setLoading(false)
         }
     });
 
@@ -92,7 +100,12 @@ const BookingForm = ({room_id} : {room_id : number}) => {
         </div>
 
         <div className="text-end">
-            <Button type="submit">Submit</Button>
+            <Button 
+                type="submit"
+                disabled={loading}
+            >
+                {loading ? 'Booking' : 'Book'}
+            </Button>
         </div>
         </form>
     );

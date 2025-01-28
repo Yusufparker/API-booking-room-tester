@@ -11,16 +11,16 @@ const Home = () => {
         {/* Portal Admin */}
         <Link
           href="/admin"
-          className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+          className="px-6 py-2 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition"
         >
           Portal Admin
         </Link>
         {/* Portal Client */}
         <Link
           href="/client"
-          className="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+          className="px-6 py-2 text-sm bg-green-500 text-white rounded hover:bg-green-600 transition"
         >
-          Portal Client
+          Portal Karyawan
         </Link>
       </div>
     </div>

@@ -8,11 +8,14 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useApiStore } from "@/hooks/useApiStore";
 import { RoomType } from "@/lib/types";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 
 type FormType = z.infer<typeof RoomFormSchema>
 
 const RoomForm = ({room} : {room? : RoomType}) => {
+    const [loading, setLoading] = useState<boolean>(false)
     const {apiUrl} = useApiStore()
     const { register, handleSubmit, formState } =
         useForm<FormType>({
@@ -30,28 +33,36 @@ const RoomForm = ({room} : {room? : RoomType}) => {
 
     const handleUpdateRoom = async (values: FormType) =>{
         try {
+            setLoading(true)
             const response = await axios.put(`${apiUrl}/rooms/${room?.id}`, values);
             console.log(response);
-            
-            window.location.reload();
+            toast.success(response.data.message);
+            setTimeout(() => {
+                window.location.reload();
+                setLoading(false);
+            }, 1000);
         } catch (error) {
             console.error("Error updating room:", error);
-            alert("Error, perbaiki rest api");
-
-        }
+            toast.error('Error, perbaiki rest api')
+            setLoading(false) 
+        } 
     }
 
 
     const handleCreateRoom = async (values: FormType) => {
         try {
+            setLoading(true)
             const response = await axios.post(`${apiUrl}/rooms`, values);
             console.log(response);
-            
-            window.location.reload()
+            toast.success(response.data.message)
+            setTimeout(() => {
+                window.location.reload();
+                setLoading(false);
+            }, 1000);
         } catch (error) {
             console.error("Error creating room:", error);
-            alert("Error, perbaiki rest api");
-
+            toast.error("Error, perbaiki rest api");
+            setLoading(false)
         }
     };
 
@@ -138,8 +149,9 @@ const RoomForm = ({room} : {room? : RoomType}) => {
             <div className="text-end">
                 <Button
                     type="submit"
+                    disabled={loading}
                 >
-                    Save
+                    {loading ? 'Saving..' : 'Save'}
                 </Button>
                 
             </div>

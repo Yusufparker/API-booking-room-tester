@@ -6,6 +6,8 @@ const ClientRoomCard = React.lazy(() => import('@/components/client/room/room-ca
 import { RoomType } from "@/lib/types";
 import RoomSkeleton from "@/components/admin/room/room-skeleton";
 import Link from "next/link";
+import toast from "react-hot-toast";
+import { MoveRight } from "lucide-react";
 
 
 
@@ -22,7 +24,7 @@ const ClientPage = () => {
                 setRooms(response.data.data);
             } catch (error) {
                 console.error("Error fetching rooms:", error);
-                alert('Error, perbaiki rest api')
+                toast.error('Error, perbaiki rest api')
             } 
         };
         fetchRooms();
@@ -38,9 +40,10 @@ const ClientPage = () => {
                     <h1 className="text-2xl font-semibold">Rooms</h1>
                     <Link
                         href='/client/history'
-                        className="text-sm underline "
+                        className="text-sm hover:underline flex items-center gap-2"
                     >
                         Bookings History
+                        <MoveRight size={12}/>
                     </Link>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

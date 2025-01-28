@@ -11,6 +11,8 @@ import {
 import { buttonVariants } from '../ui/button';
 import { RoomType } from '@/lib/types';
 import BookingForm from './booking-form';
+
+
 const BookButton = ({room} : {room : RoomType}) => {
     return (
         <Dialog>
